@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🖨️ Thermal Printer Dashboard</title>
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🖨️</text></svg>">
+    <style>
+        body {
+            font-family: -apple-system, system-ui, sans-serif;
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 15px;
+            color: #333;
+            background: #f9f9f9;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        input[type="text"],
+        input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .history-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+            padding: 8px 0;
+        }
+
+        .message-text {
+            font-weight: 500;
+        }
+
+        .timestamp {
+            font-size: 12px;
+            color: #777;
+        }
+
+        canvas {
+            border: 1px dashed #bbb;
+            display: block;
+            max-width: 100%;
+            margin: 10px auto;
+            background: #fafafa;
+            image-rendering: pixelated;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0;
+            font-weight: bold;
+            font-size: 14px;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+</head>
+
+<body>
+    <h1>🖨️ Terminal Control</h1>
+    <div id="tz-info" style="font-size: 14px; color: #666; margin-bottom: 20px;">Timezone: Loading...</div>
+
+    <div class="card">
+        <h3>Print Text Message</h3>
+        <form id="textForm">
+            <input type="text" id="inputValue" placeholder="Type text to print..." required>
+            <button type="submit">Print Message</button>
+        </form>
+    </div>
+
+    <div class="card">
+        <h3>Generate & Print QR Code</h3>
+        <input type="text" id="qrValue" placeholder="Enter URL or Text for QR Code...">
+        <button id="printQrBtn">Print QR Code</button>
+    </div>
+
+    <div class="card">
+        <h3>Print Image File</h3>
+        <input type="file" id="fileInput" accept="image/*">
+        <label>Brightness Threshold: <input type="range" id="threshold" min="0" max="255" value="128"
+                style="width:100%;"></label>
+        <canvas id="previewCanvas"></canvas>
+        <button id="printImgBtn" disabled>Print Graphic Image</button>
+    </div>
+
+    <div class="card">
+        <h3>Recent Prints Queue</h3>
+        <div id="historyLog">Loading message queue...</div>
+    </div>
+
+    <script src="/script.js"></script>
+</body>
+
+</html>
