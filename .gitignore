@@ -5,3 +5,4 @@
 .vscode/ipch
 **/*.ds_store
 include/secrets.h
+.vscode/
